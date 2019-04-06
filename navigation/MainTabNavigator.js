@@ -6,9 +6,12 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import GroceryList from '../screens/GroceryList';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  //GroceryList: GroceryList,
 });
 
 HomeStack.navigationOptions = {
@@ -24,6 +27,14 @@ HomeStack.navigationOptions = {
     />
   ),
 };
+const GroceryListStack = createStackNavigator({
+  List: GroceryList,
+});
+
+GroceryListStack.navigationOptions = {
+  tabBarLabel: 'Grocery List',
+
+}
 
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
@@ -55,6 +66,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
+  GroceryList,
   LinksStack,
   SettingsStack,
 });
