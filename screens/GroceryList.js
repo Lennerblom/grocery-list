@@ -17,8 +17,15 @@ export default class  GroceryList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            checked: false,
+            checked: Boolean,
         }
+    }
+
+    handleChecked = (e) => {
+        if(e.target.checked === false){
+          e.target.checked = true;
+        }
+        else{ e.target.checked = false};
     }
     render() {
         return (
@@ -26,25 +33,28 @@ export default class  GroceryList extends Component {
             <View style={styles.listContainer}>
                 <Text style={styles.listTitle}>All Out Of...</Text>
             <SectionList
-              renderItem={({item, index, section, separators}) => 
-              <View key={index}><CheckBox title={item} checked={this.state.checked}/></View>}
+              renderItem={({item, index}) => 
+              <View key={index}>
+                <CheckBox 
+                  title={item} 
+                //   checkedIcon='dot-circle-o'
+                //   uncheckedIcon='circle-o' 
+                  checked={false}
+                  onPress={this.handleChecked}
+                  />
+              </View>}
               renderSectionHeader={({section: {title}}) => (
               <Text style={{fontWeight: 'bold'}}>{title}</Text>
               )}
             sections={[
-                {title: 'Fruits', data: ['Oranges', 'Bananas']},
-                {title: 'Vegetables', data: ['Carrots', 'Cucumbers', 'Potatoes']},
-                {title: 'Dairy', data: ['Milk', 'Yogurt', 'Cheese']},
+                {title: 'Fruits', data: ['Apples','Oranges', 'Bananas', 'Grapes']},
+                {title: 'Vegetables', data: ['Broccoli','Carrots', 'Cucumbers', 'Potatoes', 'Peppers', 'Tomatoes']},
+                {title: 'Dairy', data: ['Milk', 'Yogurt', 'Cheese','Cream Cheese', 'Eggs', 'Butter']},
             ]}
             keyExtractor={(item, index) => item + index}
-            />
-            
+            ScrollView={horizontal=true}
+            />           
             </View>
-
-            <CheckBox
-              title='Apples2'
-              checked={this.state.checked}
-            />
           </View>
       
         );
@@ -55,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(210,210,210)',
+    width: 595,
       },
   listTitle: {
     fontSize: 17,
